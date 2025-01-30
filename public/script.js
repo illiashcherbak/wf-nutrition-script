@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
   // HERO
   // Hero TEXT ANIMATION
   // const heroWrapper = document.querySelector(".hero__content-wrapper");
-  // const tlHero = gsap.timeline();
+  const tlHero = gsap.timeline();
 
   tlHero
     .to(".animate-text", {
