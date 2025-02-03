@@ -1,18 +1,18 @@
-document.addEventListener("DOMContentLoaded", (event) => {
-  gsap.registerPlugin(ScrollTrigger, TextPlugin);
+console.log('working..');
+
+gsap.registerPlugin(ScrollTrigger, TextPlugin);
 
   // HERO
   // Hero TEXT ANIMATION
   // const heroWrapper = document.querySelector(".hero__content-wrapper");
-  // const tlHero = gsap.timeline();
+  const tlHero = gsap.timeline();
 
-  // tlHero
-  //   .to(".animate-text", {
-  //     duration: 2,
-  //     text: "Eat Well Feel Great",
-  //     ease: "power1.out",
-  //   })
-  //   .from(".");
+  tlHero
+    .to(".animate-text", {
+      duration: 2,
+      text: "Eat Well Feel Great",
+      ease: "power1.out",
+    })
 
   // I-Effect HOVER (Links)
   const iEffectWrapper = document.querySelectorAll(".i-effect");
@@ -188,4 +188,3 @@ document.addEventListener("DOMContentLoaded", (event) => {
   //     markers: true,
   //   },
   // });
-});
