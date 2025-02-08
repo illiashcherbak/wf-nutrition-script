@@ -1,7 +1,9 @@
 console.log('working..');
 
 gsap.registerPlugin(ScrollTrigger, TextPlugin);
-
+gsap.set(".page-wrapper", {
+  backgroundColor: "#fafafa",
+})
 // HERO
 // Hero TEXT DISPLAYING
 const heroTitle = document.querySelector(".hero__title");
@@ -493,4 +495,36 @@ gsap.to(".resource__img", {
     scrub: 1,
   },
   yPercent: -20,
+});
+
+// Page BG-CHANGER
+gsap.utils.toArray(".bg-changer").forEach((section) => {
+  const color = section.dataset.color;
+
+  const setColor = (bgColor) => {
+    gsap.to('.page-wrapper', {
+      backgroundColor: bgColor,
+      duration: 0.6,
+      ease: "power2.out",
+      overwrite: true,
+    })
+  }
+
+  ScrollTrigger.create({
+    trigger: section,
+    start: "top 60%",
+    end: "bottom 60%",
+    onEnter: () => {
+      setColor(color);
+    },
+    onLeave: () => {
+      setColor('#fafafa');
+    },
+    onEnterBack: () => {
+      setColor(color);
+    },
+    onLeaveBack: () => {
+      setColor('#fafafa');
+    },
+  });
 });
