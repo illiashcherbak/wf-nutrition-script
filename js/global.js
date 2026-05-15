@@ -4,7 +4,7 @@
  * Dependencies: GSAP, ScrollTrigger, TextPlugin (loaded via CDN in site settings)
  */
 
-gsap.registerPlugin(ScrollTrigger, TextPlugin);
+gsap.registerPlugin(ScrollTrigger);
 
 // #region Section Title — char-split reveal on scroll
 (function initSectionTitles() {
