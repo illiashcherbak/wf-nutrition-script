@@ -25,6 +25,8 @@
     // Create TOC item with same class structure as main tabs
     const item = document.createElement("div");
     item.classList.add("tabs__link", "i-effect");
+    // tabs__link is position:static in Webflow — override to contain the absolute hover-bg
+    item.style.position = "relative";
 
     const text = document.createElement("p");
     text.classList.add("tabs__link-text", "i-effect__item");
@@ -32,6 +34,8 @@
 
     const hoverBg = document.createElement("div");
     hoverBg.classList.add("tabs__hover-bg");
+    // Ensure hover-bg covers only this item (top:0, bottom:0 from Webflow CSS handles height)
+    gsap.set(hoverBg, { width: "0%" });
 
     item.appendChild(text);
     item.appendChild(hoverBg);
