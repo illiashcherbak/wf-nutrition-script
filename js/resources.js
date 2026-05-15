@@ -22,26 +22,38 @@
       heading.id = `heading-${index}`;
     }
 
-    // Create TOC item with same class structure as main tabs
+    // Create TOC item
     const item = document.createElement("div");
     item.classList.add("tabs__link", "i-effect");
-    // tabs__link is position:static in Webflow — override to contain the absolute hover-bg
-    item.style.position = "relative";
+    Object.assign(item.style, {
+      position: "relative",
+      overflow: "hidden",
+    });
 
     const text = document.createElement("p");
     text.classList.add("tabs__link-text", "i-effect__item");
+    text.style.position = "relative";
+    text.style.zIndex = "1";
     text.textContent = heading.textContent;
 
+    // Hover bg — all styles set explicitly to avoid Webflow CSS conflicts
     const hoverBg = document.createElement("div");
-    hoverBg.classList.add("tabs__hover-bg");
-    // Ensure hover-bg covers only this item (top:0, bottom:0 from Webflow CSS handles height)
-    gsap.set(hoverBg, { width: "0%" });
+    Object.assign(hoverBg.style, {
+      position: "absolute",
+      top: "0",
+      left: "0",
+      width: "0%",
+      height: "100%",
+      backgroundColor: "#f6e5cd",
+      borderRadius: "4px",
+      zIndex: "0",
+    });
 
     item.appendChild(text);
     item.appendChild(hoverBg);
     toc.appendChild(item);
 
-    tocItems.push({ item, heading });
+    tocItems.push({ item, heading, hoverBg });
 
     // Click → scroll to heading (Lenis-aware)
     item.addEventListener("click", () => {
@@ -56,12 +68,8 @@
   });
 
   // Init tabs hover on dynamically created items
-  // (global.js already ran, so these need their own listeners)
-  tocItems.forEach(({ item }) => {
-    const bg = item.querySelector(".tabs__hover-bg");
-    if (!bg) return;
-
-    const hover = gsap.to(bg, {
+  tocItems.forEach(({ item, hoverBg }) => {
+    const hover = gsap.to(hoverBg, {
       width: "100%",
       duration: 0.8,
       ease: "power2.out",
