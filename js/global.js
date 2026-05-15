@@ -1,20 +1,21 @@
 /**
  * NutriHealth — Global Animations
- * Runs on every page. Matches original Slater global (51960.js).
- * Dependencies: GSAP, ScrollTrigger (loaded via CDN in site settings)
+ * Runs on every page. Only truly shared animations that aren't
+ * duplicated in page-specific scripts.
+ * Dependencies: GSAP, ScrollTrigger (loaded via CDN)
  */
 
 gsap.registerPlugin(ScrollTrigger);
 
 // #region Section Title — char-split reveal on scroll
 (function initSectionTitles() {
-  const titles = document.querySelectorAll(".section__title");
+  var titles = document.querySelectorAll(".section__title");
   if (!titles.length) return;
 
-  titles.forEach((title) => {
-    const chars = title.textContent.split("");
+  titles.forEach(function (title) {
+    var chars = title.textContent.split("");
     title.innerHTML = chars
-      .map((ch) => `<span class="ch">${ch}</span>`)
+      .map(function (ch) { return '<span class="ch">' + ch + "</span>"; })
       .join("");
 
     gsap.from(title.querySelectorAll(".ch"), {
@@ -34,56 +35,44 @@ gsap.registerPlugin(ScrollTrigger);
 
 // #region I-Effect — skew hover on links
 (function initIEffect() {
-  const wrappers = document.querySelectorAll(".i-effect");
+  var wrappers = document.querySelectorAll(".i-effect");
   if (!wrappers.length) return;
 
-  wrappers.forEach((wrapper) => {
-    const item = wrapper.querySelector(".i-effect__item");
+  wrappers.forEach(function (wrapper) {
+    var item = wrapper.querySelector(".i-effect__item");
     if (!item) return;
 
-    const hover = gsap.to(item, {
+    var hover = gsap.to(item, {
       skewX: -15,
       duration: 0.3,
       ease: "power1.out",
       paused: true,
     });
 
-    wrapper.addEventListener("mouseenter", () => hover.play());
-    wrapper.addEventListener("mouseleave", () => hover.reverse());
+    wrapper.addEventListener("mouseenter", function () { hover.play(); });
+    wrapper.addEventListener("mouseleave", function () { hover.reverse(); });
   });
 })();
 // #endregion
 
 // #region Resource Card — button reveal + text fade on hover
 (function initResourceCardHover() {
-  const cards = document.querySelectorAll(".resource");
+  var cards = document.querySelectorAll(".resource");
   if (!cards.length) return;
 
-  cards.forEach((card) => {
-    const btn = card.querySelector(".btn");
-    const cardText = card.querySelector(".resource__text");
+  cards.forEach(function (card) {
+    var btn = card.querySelector(".btn");
+    var cardText = card.querySelector(".resource__text");
     if (!btn || !cardText) return;
 
-    const hover = gsap.timeline({ paused: true });
+    var hover = gsap.timeline({ paused: true });
 
     hover
-      .to(btn, {
-        y: "0%",
-        duration: 0.4,
-        ease: "power1.out",
-      })
-      .to(
-        cardText,
-        {
-          opacity: 0,
-          duration: 0.4,
-          ease: "power1.out",
-        },
-        "<"
-      );
+      .to(btn, { y: "0%", duration: 0.4, ease: "power1.out" })
+      .to(cardText, { opacity: 0, duration: 0.4, ease: "power1.out" }, "<");
 
-    card.addEventListener("mouseenter", () => hover.play());
-    card.addEventListener("mouseleave", () => hover.reverse());
+    card.addEventListener("mouseenter", function () { hover.play(); });
+    card.addEventListener("mouseleave", function () { hover.reverse(); });
   });
 })();
 // #endregion
