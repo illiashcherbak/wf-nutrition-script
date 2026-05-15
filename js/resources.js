@@ -8,7 +8,7 @@
 // #region TOC — generate from article headings + init hover
 (function initTableOfContents() {
   const richText = document.querySelector(".article__body");
-  const toc = document.querySelector(".tabs__menu");
+  const toc = document.querySelector(".tabs__menu--post");
   if (!richText || !toc) return;
 
   const HEADER_OFFSET = 150;
