@@ -5,6 +5,9 @@
  * Dependencies: GSAP, ScrollTrigger (loaded via CDN)
  */
 
+(function () {
+  function init() {
+
 // #region TOC — generate from article headings + init hover
 (function initTableOfContents() {
   const richText = document.querySelector(".article__body");
@@ -116,3 +119,12 @@
   }
 })();
 // #endregion
+
+  } // end init()
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    requestAnimationFrame(init);
+  }
+})();

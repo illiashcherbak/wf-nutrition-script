@@ -5,6 +5,9 @@
  * Dependencies: GSAP, ScrollTrigger (loaded via CDN)
  */
 
+(function () {
+  function init() {
+
 gsap.registerPlugin(ScrollTrigger);
 
 // #region Section Title — char-split reveal on scroll
@@ -76,3 +79,12 @@ gsap.registerPlugin(ScrollTrigger);
   });
 })();
 // #endregion
+
+  } // end init()
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    requestAnimationFrame(init);
+  }
+})();

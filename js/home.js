@@ -5,6 +5,9 @@
  * Dependencies: GSAP, ScrollTrigger, Splide (loaded via CDN)
  */
 
+(function () {
+  function init() {
+
 // #region 1. Video play/pause with thumbnail
 (function initVideoPlayer() {
   const playButton = document.querySelector(".advice__play-button");
@@ -575,3 +578,12 @@
   });
 })();
 // #endregion
+
+  } // end init()
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    requestAnimationFrame(init);
+  }
+})();
