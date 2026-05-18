@@ -28,12 +28,15 @@
     Object.assign(item.style, {
       position: "relative",
       overflow: "hidden",
+      display: "flex",
+      alignItems: "center",
     });
 
     const text = document.createElement("p");
     text.classList.add("tabs__link-text", "i-effect__item");
     text.style.position = "relative";
     text.style.zIndex = "1";
+    text.style.margin = "0";
     text.textContent = heading.textContent;
 
     // Hover bg — all styles set explicitly to avoid Webflow CSS conflicts
